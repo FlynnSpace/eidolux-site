@@ -1,0 +1,20 @@
+products:
+  - slug: orevault
+    repo: https://github.com/eidolux/OreVault
+    mode: live
+    desc: "个人知识库 · Obsidian Vault"
+    route: /orevault
+    tags: [knowledge, obsidian]
+
+  - slug: video-agent
+    repo: https://github.com/eidolux/ai-video-agent
+    mode: link-only
+    desc: "本地视频创作 AI Agent"
+    tags: [ai, video, agent]
+
+  - slug: about
+    repo: null
+    mode: static
+    desc: "关于 eidolux"
+    route: /about
+    tags: []
