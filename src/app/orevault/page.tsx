@@ -6,20 +6,32 @@ export default function OreVaultPage() {
   const stats = getMockVaultStats();
 
   return (
-    <div data-route="orevault">
-      <section className="mb-8">
-        <h1 className="font-mono text-2xl font-bold mb-2">OreVault</h1>
-        <p className="text-[var(--color-ink-muted)] text-sm mb-6">
-          个人知识库 · Obsidian Vault — 文件夹结构与笔记标题一览（正文不公开）
+    <div>
+      <section className="pt-24 pb-16">
+        <p
+          className="text-[11px] font-bold uppercase text-[var(--color-stone)] flex items-center gap-3.5 mb-7"
+          style={{ fontFamily: "var(--font-display)", letterSpacing: "0.16em" }}
+        >
+          <span className="inline-block w-6 h-px bg-[var(--color-ink)]"></span>
+          knowledge vault
         </p>
-        <div className="flex gap-6 text-sm">
-          <Stat label="笔记" value={stats.totalNotes.toString()} />
-          <Stat label="总字数" value={formatNumber(stats.totalWords)} />
-          <Stat label="最近更新" value={stats.lastUpdated} />
+        <h1
+          className="text-[clamp(40px,8vw,72px)] font-medium leading-[0.95] mb-6"
+          style={{ fontFamily: "var(--font-display)", letterSpacing: "-0.035em" }}
+        >
+          orevault<span className="text-[var(--color-rust)]">.</span>
+        </h1>
+        <p className="text-[15px] leading-[1.7] text-[var(--color-stone)] max-w-[620px] mb-10">
+          个人知识库 · 文件夹结构与笔记标题一览
+        </p>
+        <div className="flex gap-10 text-sm">
+          <Stat label="notes" value={stats.totalNotes.toString()} />
+          <Stat label="words" value={formatNumber(stats.totalWords)} />
+          <Stat label="updated" value={stats.lastUpdated} />
         </div>
       </section>
 
-      <section className="border border-[var(--color-border)] rounded-[var(--radius-lg)] p-4 bg-[var(--color-surface)]">
+      <section className="border-t border-[var(--color-ink)] pt-8 pb-24">
         <FileTree nodes={tree} />
       </section>
     </div>
@@ -28,11 +40,14 @@ export default function OreVaultPage() {
 
 function Stat({ label, value }: { label: string; value: string }) {
   return (
-    <div className="flex flex-col">
-      <span className="text-[var(--color-ink-muted)] text-xs uppercase tracking-wider">
+    <div className="flex flex-col gap-1">
+      <span
+        className="text-[11px] font-bold uppercase text-[var(--color-stone)]"
+        style={{ fontFamily: "var(--font-display)", letterSpacing: "0.14em" }}
+      >
         {label}
       </span>
-      <span className="font-mono font-medium text-base">{value}</span>
+      <span className="font-medium text-base">{value}</span>
     </div>
   );
 }

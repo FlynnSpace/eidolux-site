@@ -1,20 +1,16 @@
 products:
-  - slug: orevault
-    repo: https://github.com/eidolux/OreVault
-    mode: live
-    desc: "个人知识库 · Obsidian Vault"
-    route: /orevault
-    tags: [knowledge, obsidian]
+  now:
+    - slug: OreVault
+      repo: https://github.com/eidolux/OreVault
+      mode: live
+      desc: "A personal knowledge vault built on Obsidian. 147 notes across AI product engineering, critical theory, and life design. The structure itself is the product."
+      route: /orevault
+      status: live
 
-  - slug: video-agent
-    repo: https://github.com/eidolux/ai-video-agent
-    mode: link-only
-    desc: "本地视频创作 AI Agent"
-    tags: [ai, video, agent]
+    - slug: Video Agent
+      repo: https://github.com/eidolux/ai-video-agent
+      mode: link-only
+      desc: "A local AI agent that handles the full video production pipeline, from script to final cut. Designed to automate everything except the decisions that matter."
+      status: in progress
 
-  - slug: about
-    repo: null
-    mode: static
-    desc: "关于 eidolux"
-    route: /about
-    tags: []
+  shipped: []
