@@ -1,9 +1,10 @@
-import { getMockVaultTree, getMockVaultStats } from "@/lib/orevault-mock";
+import { getVaultData } from "@/lib/orevault";
 import { FileTree } from "@/components/file-tree";
 
-export default function OreVaultPage() {
-  const tree = getMockVaultTree();
-  const stats = getMockVaultStats();
+export const revalidate = 3600;
+
+export default async function OreVaultPage() {
+  const { tree, stats } = await getVaultData();
 
   return (
     <div>

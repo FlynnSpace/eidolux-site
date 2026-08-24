@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import type { VaultNode } from "@/lib/orevault-mock";
+import type { VaultNode } from "@/lib/orevault";
 
 export function FileTree({ nodes }: { nodes: VaultNode[] }) {
   return (
