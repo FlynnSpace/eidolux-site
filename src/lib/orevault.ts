@@ -170,36 +170,38 @@ function estimateWords(items: GitHubTreeItem[]): number {
   return Math.round((totalBytes * 0.65) / 3);
 }
 
+async function fallback() {
+  const { getMockVaultTree, getMockVaultStats } = await import(
+    "./orevault-mock"
+  );
+  return { tree: getMockVaultTree(), stats: getMockVaultStats() };
+}
+
 export async function getVaultData(): Promise<{
   tree: VaultNode[];
   stats: VaultStats;
 }> {
   const token = process.env.GITHUB_TOKEN;
+  if (!token) return fallback();
 
-  if (!token) {
-    // Fallback: import mock
-    const { getMockVaultTree, getMockVaultStats } = await import(
-      "./orevault-mock"
-    );
-    return { tree: getMockVaultTree(), stats: getMockVaultStats() };
+  try {
+    const [treeRes, commits] = await Promise.all([
+      githubFetch<GitHubTreeResponse>(
+        `/repos/${OWNER}/${REPO}/git/trees/${BRANCH}?recursive=1`
+      ),
+      githubFetch<GitHubCommit[]>(
+        `/repos/${OWNER}/${REPO}/commits?sha=${BRANCH}&per_page=1`
+      ),
+    ]);
+
+    const tree = buildTree(treeRes.tree);
+    const totalNotes = countNotes(treeRes.tree);
+    const totalWords = estimateWords(treeRes.tree);
+    const lastUpdated = commits[0]?.commit.committer.date.slice(0, 10) ?? "unknown";
+
+    return { tree, stats: { totalNotes, totalWords, lastUpdated } };
+  } catch {
+    console.warn("GitHub API failed, using mock data");
+    return fallback();
   }
-
-  const [treeRes, commits] = await Promise.all([
-    githubFetch<GitHubTreeResponse>(
-      `/repos/${OWNER}/${REPO}/git/trees/${BRANCH}?recursive=1`
-    ),
-    githubFetch<GitHubCommit[]>(
-      `/repos/${OWNER}/${REPO}/commits?sha=${BRANCH}&per_page=1`
-    ),
-  ]);
-
-  const tree = buildTree(treeRes.tree);
-  const totalNotes = countNotes(treeRes.tree);
-  const totalWords = estimateWords(treeRes.tree);
-  const lastUpdated = commits[0]?.commit.committer.date.slice(0, 10) ?? "unknown";
-
-  return {
-    tree,
-    stats: { totalNotes, totalWords, lastUpdated },
-  };
 }
