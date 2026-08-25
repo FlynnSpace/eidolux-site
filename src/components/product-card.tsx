@@ -6,10 +6,10 @@ function CardContent({ product }: { product: Product }) {
     <div className="flex items-start justify-between gap-6">
       <span>
         <Link
-          href={product.route ?? product.repo ?? "#"}
+          href={product.route ?? product.url ?? product.repo ?? "#"}
           className="font-medium transition-colors duration-150 hover:text-[var(--color-rust)] mr-1"
           style={{ fontFamily: "var(--font-display)" }}
-          {...(!product.route && product.repo
+          {...(!product.route && (product.url || product.repo)
             ? { target: "_blank", rel: "noopener noreferrer" }
             : {})}
         >

@@ -16,7 +16,7 @@ products:
   shipped:
     - slug: Unprompted
       repo: https://github.com/FlynnSpace/unprompted
-      url: https://flynnspace.github.io/unprompted/
+      url: https://unprompted.eidolux.party
       mode: link-only
       desc: "即兴演讲练习工具。Spin a topic, start the timer, think on your feet. Bilingual (EN/中文), full sound design, zero backend."
       status: shipped

@@ -5,6 +5,7 @@ import { parse } from "yaml";
 export interface Product {
   slug: string;
   repo: string | null;
+  url?: string;
   mode: "live" | "static" | "link-only";
   desc: string;
   route?: string;
