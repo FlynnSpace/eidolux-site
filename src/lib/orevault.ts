@@ -68,7 +68,7 @@ async function githubFetch<T>(endpoint: string): Promise<T> {
       Accept: "application/vnd.github+json",
       "X-GitHub-Api-Version": "2022-11-28",
     },
-    next: { revalidate: 3600 },
+    cache: "force-cache",
   });
 
   if (!res.ok) {

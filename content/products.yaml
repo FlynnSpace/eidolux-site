@@ -13,4 +13,10 @@ products:
       desc: "A local AI agent that handles the full video production pipeline, from script to final cut. Designed to automate everything except the decisions that matter."
       status: in progress
 
-  shipped: []
+  shipped:
+    - slug: Unprompted
+      repo: https://github.com/FlynnSpace/unprompted
+      url: https://flynnspace.github.io/unprompted/
+      mode: link-only
+      desc: "即兴演讲练习工具。Spin a topic, start the timer, think on your feet. Bilingual (EN/中文), full sound design, zero backend."
+      status: shipped
